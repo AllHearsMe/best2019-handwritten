@@ -2,4 +2,4 @@
 
 ## How to use
 - Create directories "Input" and "Output"
-- run Contest_Pipeline.py
+- Run Contest_Pipeline.py
