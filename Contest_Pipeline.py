@@ -105,12 +105,12 @@ def ctc_trainer(predictor_model, lr=0.001, max_label_length=80):
 def fit_image(im, shape):
     fy = shape[0]/im.shape[0]
     fx = shape[1]/im.shape[1]
-    if fy < fx:
-        im2 = cv2.resize(im, dsize=(0, 0), fx=fy, fy=fy, interpolation=cv2.INTER_AREA if fy < 1 else cv2.INTER_CUBIC)
-        im2 = np.pad(im2, [(0, 0), (0, shape[1]-im.shape[1])], mode='constant', constant_values=255)
-    else:
+    if fx < fy:
         im2 = cv2.resize(im, dsize=(0, 0), fx=fx, fy=fx, interpolation=cv2.INTER_AREA if fx < 1 else cv2.INTER_CUBIC)
-        im2 = np.pad(im2, [(0, shape[1]-im.shape[1]), (0, 0)], mode='constant', constant_values=255)
+        im2 = np.pad(im2, [(0, shape[0]-im2.shape[0]), (0, 0)], mode='constant', constant_values=255)
+    else:
+        im2 = cv2.resize(im, dsize=(0, 0), fx=fy, fy=fy, interpolation=cv2.INTER_AREA if fy < 1 else cv2.INTER_CUBIC)
+        im2 = np.pad(im2, [(0, 0), (0, shape[1]-im2.shape[1])], mode='constant', constant_values=255)
     return im2
 
 
